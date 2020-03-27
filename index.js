@@ -9,7 +9,7 @@ var games = new Map();
 var nextId = 100;
 
 app.get('/', (_, res) => {
-  res.send('Hello Express app!')
+  res.send('Welcome to the Turtle Repository!')
 });
 
 app.get('/games', (_, res) => {
