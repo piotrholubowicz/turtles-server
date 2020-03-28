@@ -1,13 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express();
 app.use(bodyParser.json()) // for parsing application/json
-app.use((_, res, next) => {
-  // res.header("Access-Control-Allow-Origin", "turtles.stackblitz.io");
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+app.use(cors())
 
 var games = new Map();
 
