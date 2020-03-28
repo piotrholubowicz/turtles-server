@@ -3,6 +3,11 @@ const bodyParser = require('body-parser')
 
 const app = express();
 app.use(bodyParser.json()) // for parsing application/json
+app.use((_, res, next) => {
+  res.header("Access-Control-Allow-Origin", "turtles-server.herokuapp.com");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 var games = new Map();
 
