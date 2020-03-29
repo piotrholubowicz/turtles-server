@@ -49,7 +49,7 @@ app.put('/games/:id', (req, res) => {
     return res.sendStatus(404)
   }
   games.set(id, game);
-  res.sendStatus(200);
+  res.sendStatus(204);
 });
 
 app.delete('/games/:id', (req, res) => {
