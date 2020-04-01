@@ -4,7 +4,20 @@ const cors = require('cors')
 
 const app = express();
 app.use(bodyParser.json()) // for parsing application/json
-app.use(cors())
+
+const corsOptions = {
+  exposedHeaders: [
+    'Cache-Control',
+    'Content-Language',
+    'Content-Length',
+    'Content-Type',
+    'Expires',
+    'Last-Modified',
+    'Pragma',
+    'Etag'
+  ],
+}
+app.use(cors(corsOptions))
 
 var games = new Map();
 
