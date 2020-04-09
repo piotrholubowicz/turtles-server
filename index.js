@@ -46,7 +46,7 @@ app.post('/games', (req, res) => {
     return res.status(400).send(error);
   }
   if(req.query.prevGame) {
-    return createNextGame(game, +req.query.prevGame);
+    return createNextGame(res, game, +req.query.prevGame);
   }
 
   const id = nextId++;
@@ -55,7 +55,7 @@ app.post('/games', (req, res) => {
   res.json(game);
 });
 
-function createNextGame(game, prevGameId) {
+function createNextGame(res, game, prevGameId) {
   if (!games.has(prevGameId)) {
     return res.status(400).send("Invalid prevGame");
   }
