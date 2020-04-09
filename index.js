@@ -45,11 +45,31 @@ app.post('/games', (req, res) => {
   if (error) {
     return res.status(400).send(error);
   }
+  if(req.query.prevGame) {
+    return createNextGame(game, +req.query.prevGame);
+  }
+
   const id = nextId++;
   game['id'] = id;
   games.set(id, game);
   res.json(game);
 });
+
+function createNextGame(game, prevGameId) {
+  if (!games.has(prevGameId)) {
+    return res.status(400).send("Invalid prevGame");
+  }
+  prevGame = games.get(prevGameId);
+  if (games.get(prevGameId).next_game_id) {
+    return res.json(games.get(prevGame.next_game_id));
+  }
+  
+  const id = nextId++;
+  game['id'] = id;
+  games.set(id, game);
+  prevGame.next_game_id = id;
+  return res.json(game);
+}
 
 app.put('/games/:id', (req, res) => {
   var game = req.body;
